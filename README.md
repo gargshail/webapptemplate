@@ -1,6 +1,4 @@
-mvn compile
-mvn package
-target\bin\webapp.bat
+mvn jetty:run
 
-http://localhost:8080/
 
+http://localhost/rest/orders

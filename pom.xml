@@ -1,7 +1,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.mcafee.sustenance</groupId>
+	<groupId>com.myapp</groupId>
 	<artifactId>webapptemplate</artifactId>
 	<version>1.0-SNAPSHOT</version>
 	<name>embeddedTomcatSample Maven Webapp</name>
@@ -94,6 +94,11 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.1.6</version>
 		</dependency>
+		<dependency>
+			<groupId>org.apache.derby</groupId>
+			<artifactId>derby</artifactId>
+			<version>10.10.2.0</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<finalName>embeddedTomcatSample</finalName>
@@ -112,29 +117,6 @@
 					<source>1.6</source>
 					<target>1.6</target>
 				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>appassembler-maven-plugin</artifactId>
-				<version>1.1.1</version>
-				<configuration>
-					<assembleDirectory>target</assembleDirectory>
-					<extraJvmArguments>-Dnsmdir=../.. -Dwebappdir=webapp</extraJvmArguments>
-					<programs>
-						<program>
-							<mainClass>com.mcafee.sustenance.healthcheck.Main</mainClass>
-							<name>webapp</name>
-						</program>
-					</programs>
-				</configuration>
-				<executions>
-					<execution>
-						<phase>package</phase>
-						<goals>
-							<goal>assemble</goal>
-						</goals>
-					</execution>
-				</executions>
 			</plugin>
 		</plugins>
 	</build>

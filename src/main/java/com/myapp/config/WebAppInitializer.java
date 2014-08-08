@@ -1,62 +1,75 @@
 // {!begin top}
 package com.myapp.config;
 
+import java.util.Set;
+
+import javax.servlet.ServletContext;
+import javax.servlet.ServletRegistration;
+
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
-import org.springframework.web.filter.DelegatingFilterProxy;
 import org.springframework.web.servlet.DispatcherServlet;
-
-import javax.servlet.FilterRegistration;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletRegistration;
-import java.util.Set;
 
 public class WebAppInitializer implements WebApplicationInitializer {
 
-// {!end top}
+	// {!end top}
 
-  // {!begin onStartup}
-  @Override
-  public void onStartup(ServletContext servletContext) {
-    WebApplicationContext rootContext = createRootContext(servletContext);
+	// {!begin onStartup}
+	@Override
+	public void onStartup(ServletContext servletContext) {
+		WebApplicationContext rootContext = createRootContext(servletContext);
 
-    configureSpringMvc(servletContext, rootContext);
-  }
-  // {!end onStartup}
+		configureSpringMvc(servletContext, rootContext);
+	}
 
-  // {!begin createRootContext}
-  private WebApplicationContext createRootContext(ServletContext servletContext) {
-    AnnotationConfigWebApplicationContext rootContext = new AnnotationConfigWebApplicationContext();
+	// {!end onStartup}
 
-    servletContext.addListener(new ContextLoaderListener(rootContext));
-    servletContext.setInitParameter("defaultHtmlEscape", "true");
+	// {!begin createRootContext}
+	private WebApplicationContext createRootContext(
+			ServletContext servletContext) {
+		AnnotationConfigWebApplicationContext rootContext = new AnnotationConfigWebApplicationContext();
 
-    return rootContext;
-  }
-  // {!end createRootContext}
+		servletContext.addListener(new ContextLoaderListener(rootContext));
+		servletContext.setInitParameter("defaultHtmlEscape", "true");
 
-  // {!begin configureTop}
-  private void configureSpringMvc(ServletContext servletContext, WebApplicationContext rootContext) {
-    AnnotationConfigWebApplicationContext mvcContext = new AnnotationConfigWebApplicationContext();
-    mvcContext.register(MVCConfig.class);
+		return rootContext;
+	}
 
-    mvcContext.setParent(rootContext);
+	// {!end createRootContext}
 
-    // {!end configureTop}
-    // {!begin configureBottom}
-    ServletRegistration.Dynamic appServlet = servletContext.addServlet(
-        "webservice", new DispatcherServlet(mvcContext));
-    appServlet.setLoadOnStartup(1);
-    Set<String> mappingConflicts = appServlet.addMapping("/rest/*");
+	// {!begin configureTop}
+	private void configureSpringMvc(ServletContext servletContext,
+			WebApplicationContext rootContext) {
 
-    if (!mappingConflicts.isEmpty()) {
-      for (String s : mappingConflicts) {
-      }
-      throw new IllegalStateException(
-          "'webservice' cannot be mapped to '/'");
-    }
-    // {!end configureBottom}
-  }
+		ClassPathXmlApplicationContext classPathXmlContext = new ClassPathXmlApplicationContext(
+				new String[] { "beanconfig.xml" });
+		
+		classPathXmlContext.setParent(rootContext);
+
+		AnnotationConfigWebApplicationContext mvcContext = new AnnotationConfigWebApplicationContext();
+		
+		mvcContext.register(MVCConfig.class);
+
+		mvcContext.setParent(rootContext);
+
+		mvcContext.refresh();
+		
+		// {!end configureTop}
+		// {!begin configureBottom}
+		ServletRegistration.Dynamic appServlet = servletContext.addServlet(
+				"webservice", new DispatcherServlet(mvcContext));
+		appServlet.setLoadOnStartup(1);
+		Set<String> mappingConflicts = appServlet.addMapping("/rest/*");
+
+		if (!mappingConflicts.isEmpty()) {
+			for (String s : mappingConflicts) {
+			}
+			throw new IllegalStateException(
+					"'webservice' cannot be mapped to '/'");
+		}
+		// {!end configureBottom}
+	}
 }

@@ -6,7 +6,6 @@ import java.util.Set;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletRegistration;
 
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.WebApplicationContext;
@@ -32,6 +31,7 @@ public class WebAppInitializer implements WebApplicationInitializer {
 			ServletContext servletContext) {
 		AnnotationConfigWebApplicationContext rootContext = new AnnotationConfigWebApplicationContext();
 
+		
 		servletContext.addListener(new ContextLoaderListener(rootContext));
 		servletContext.setInitParameter("defaultHtmlEscape", "true");
 
@@ -44,18 +44,16 @@ public class WebAppInitializer implements WebApplicationInitializer {
 	private void configureSpringMvc(ServletContext servletContext,
 			WebApplicationContext rootContext) {
 
-		ClassPathXmlApplicationContext classPathXmlContext = new ClassPathXmlApplicationContext(
-				new String[] { "beanconfig.xml" });
 		
-		classPathXmlContext.setParent(rootContext);
-
 		AnnotationConfigWebApplicationContext mvcContext = new AnnotationConfigWebApplicationContext();
 		
-		mvcContext.register(MVCConfig.class);
-
+		mvcContext.register(MVCConfig.class, JPAConfig.class);
+//
+//		mvcContext.refresh();
+		
 		mvcContext.setParent(rootContext);
 
-		mvcContext.refresh();
+	
 		
 		// {!end configureTop}
 		// {!begin configureBottom}

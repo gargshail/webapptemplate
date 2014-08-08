@@ -1,8 +1,18 @@
 package com.myapp.rest.domain;
 
+
+
+
 public class User {
+	
+
+	
+
 	String fname;
+	
+	
 	String lname;
+	
 	public String getFname() {
 		return fname;
 	}

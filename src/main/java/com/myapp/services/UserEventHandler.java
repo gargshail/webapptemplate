@@ -14,7 +14,7 @@ public class UserEventHandler implements UserService {
 	@Override
 	public AllUserEvent findAllUsers(RequestAllUserEvent event) {
 		
-		AllUserEvent aue = new AllUserEvent(repository.getUsers());
+		AllUserEvent aue = new AllUserEvent(repository.findAll());
 		return aue;
 	}
 

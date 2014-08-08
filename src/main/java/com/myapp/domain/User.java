@@ -1,7 +1,22 @@
 package com.myapp.domain;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table (name="User")
+
 public class User {
+	
+	@Id @GeneratedValue long id;
+	
+	@Column
 	String fname;
+	
+	@Column
 	String lname;
 	String pwhash;
 	String username;

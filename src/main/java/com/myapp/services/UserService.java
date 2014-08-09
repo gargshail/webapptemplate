@@ -8,4 +8,7 @@ import com.myapp.events.RequestAllUserEvent;
 @Service
 public interface UserService {
 	AllUserEvent findAllUsers(RequestAllUserEvent event);
+	
+	void addRandomUser();
+	
 }

@@ -6,7 +6,10 @@ import javax.sql.DataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.data.repository.init.JacksonRepositoryPopulatorFactoryBean;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import org.springframework.orm.hibernate3.HibernateExceptionTranslator;
@@ -57,6 +60,21 @@ public class JPAConfig {
 	    return txManager;
 	  }
 	  
+	  
+//	  
+//	  @Bean
+//	  public JacksonRepositoryPopulatorFactoryBean repositoryPopulator() {
+//
+//	    Resource sourceData = new ClassPathResource("test-data.json");
+//
+//	    JacksonRepositoryPopulatorFactoryBean factory = new JacksonRepositoryPopulatorFactoryBean();
+//	 
+//	    factory.setResources(new Resource[] { sourceData });
+//	    
+//	    return factory;
+//	  }
+	  
+	  // need to move to separate config
 	  @Bean
 	  public UserService  userService() {
 		  return new UserEventHandler();

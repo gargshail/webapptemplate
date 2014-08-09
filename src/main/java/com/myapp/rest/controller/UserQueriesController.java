@@ -17,7 +17,6 @@ import com.myapp.services.UserService;
 @Controller
 @RequestMapping("/users")
 public class UserQueriesController {
-
 	
 
 	@Autowired
@@ -37,6 +36,7 @@ public class UserQueriesController {
     @ResponseBody
     public User getUser(@PathVariable String id) {
       
+
       User user = new User();
        
        user.setFname("James " + id);
@@ -45,5 +45,14 @@ public class UserQueriesController {
    
        return user;
     }
+    
+    @RequestMapping(method = RequestMethod.GET, value="/radd")
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
 
+    public String addRandomUser() {
+    	userService.addRandomUser();
+    	return "Ok";
+    }
+    
 }

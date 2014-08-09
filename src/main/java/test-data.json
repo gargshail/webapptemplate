@@ -1,0 +1,5 @@
+[ { "_class" : "com.myapp.domain.User",
+  "id":1,
+  "fname" : "Dave",
+  "lname" : "Matthews" } 
+  ]

@@ -27,6 +27,7 @@ public class UserQueriesController {
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
     public AllUserEvent getUsers() {
+		System.out.println("getting all users");
 		return userService.findAllUsers(new RequestAllUserEvent());
 	}
    
@@ -51,7 +52,9 @@ public class UserQueriesController {
     @ResponseBody
 
     public String addRandomUser() {
+    	System.out.println("Adding random user");
     	userService.addRandomUser();
+    	System.out.println(" done Adding random user");
     	return "Ok";
     }
     

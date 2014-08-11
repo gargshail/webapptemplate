@@ -1,6 +1,7 @@
 package com.myapp.events;
 
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -14,9 +15,9 @@ public class AllUserEvent {
 	public AllUserEvent(Iterable<User> itereable) {
 		
 		users = new LinkedList<User>();
-		
-		while(itereable.iterator().hasNext()) {
-			users.add(itereable.iterator().next());
+		Iterator<User> itr = itereable.iterator();
+		while(itr.hasNext()) {
+			users.add(itr.next());
 		}
 	}
 	

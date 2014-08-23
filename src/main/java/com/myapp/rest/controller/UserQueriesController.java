@@ -4,11 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import com.myapp.events.AddUserEvent;
 import com.myapp.events.AllUserEvent;
 import com.myapp.events.RequestAllUserEvent;
 import com.myapp.rest.domain.User;
@@ -56,6 +58,13 @@ public class UserQueriesController {
     	userService.addRandomUser();
     	System.out.println(" done Adding random user");
     	return "Ok";
+    }
+    
+    @RequestMapping(method = RequestMethod.POST, value="/add")
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    public String addUser(@RequestBody AddUserEvent json){
+    	return  json.toString();
     }
     
 }

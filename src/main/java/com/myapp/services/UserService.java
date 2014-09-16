@@ -2,6 +2,7 @@ package com.myapp.services;
 
 import org.springframework.stereotype.Service;
 
+import com.myapp.events.AddUserEvent;
 import com.myapp.events.AllUserEvent;
 import com.myapp.events.RequestAllUserEvent;
 
@@ -10,5 +11,7 @@ public interface UserService {
 	AllUserEvent findAllUsers(RequestAllUserEvent event);
 	
 	void addRandomUser();
+
+    String addUser(AddUserEvent addUserEvent); 
 	
 }

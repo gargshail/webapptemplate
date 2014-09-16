@@ -20,7 +20,7 @@ import com.myapp.services.UserService;
 
 @Configuration
 @EnableJpaRepositories("com.myapp.repositories")
-@ComponentScan(basePackages = {"com.myapp.service"})
+
 public class JPAConfig {
 	
 	@Bean

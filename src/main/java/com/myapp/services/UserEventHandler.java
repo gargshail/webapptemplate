@@ -5,6 +5,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.support.DefaultTransactionStatus;
 
 import com.myapp.domain.User;
+import com.myapp.events.AddUserEvent;
 import com.myapp.events.AllUserEvent;
 import com.myapp.events.RequestAllUserEvent;
 import com.myapp.repositories.UserRepository;
@@ -38,5 +39,14 @@ public class UserEventHandler implements UserService {
 		System.out.println("Saved");
 		return;
 	}
+
+    @Override
+    public String addUser(AddUserEvent addUserEvent) {
+        User u = new User();
+        u.setFname(addUserEvent.getFname());
+        u.setLname(addUserEvent.getLname());
+        u = repository.save(u);
+        return u.toString();
+    }
 
 }

@@ -63,8 +63,8 @@ public class UserQueriesController {
     @RequestMapping(method = RequestMethod.POST, value="/add")
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
-    public String addUser(@RequestBody AddUserEvent json){
-    	return  json.toString();
+    public String addUser(@RequestBody AddUserEvent addUserEvent){
+        return userService.addUser(addUserEvent);
     }
     
 }

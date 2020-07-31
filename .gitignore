@@ -1,6 +1,9 @@
 target
 .classpath
-.settings
 .project
-*.swp
+.settings
+.idea
+.gradle
 .DS_Store
+build
+out

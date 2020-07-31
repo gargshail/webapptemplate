@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+<body>
+<div id="app">
+    {{ message }}
+</div>
+
+<div id="app-2">
+                  <span v-bind:title="message">
+                              Hover your mouse over me for a few seconds
+                                  to see my dynamically bound title!
+                                    </span>
+</div>
+<script>
+var app = new Vue({
+  el: '#app',
+  data: {
+    message: 'Hello Vue!'
+  }
+})
+
+var app2 = new Vue({
+  el: '#app-2',
+  data: {
+    message: 'You loaded this page on ' + new Date().toLocaleString()
+  }
+})
+        </script>
+
+
+<ul>
+    <li><a href="/swagger-ui.html">Swagger</a></li>
+    <li><a href="/h2-console">H2 Console.</a></li>
+</ul>
+Check logs for JDBC url. It looks something like this jdbc:h2:mem:1d9597ec-70b7-4e50-9eba-26027a88420e
+</body>
+</html>

@@ -11,7 +11,7 @@
 <div id="app">
     <h3> {{ mainTitle }}</h3>
 
-
+    <button @click=refreshData()>Refresh</button>
     <table border="1">
         <tr>
             <th>Date</th>
@@ -29,7 +29,7 @@
         Title : <input type="text" v-model:value="diaryEntry.title" /> <br/>
         Content : <input type="text" v-model:value="diaryEntry.content" /> <br/>
         <button @click=createEntry(diaryEntry)>Create</button>
-        <button @click=refreshData()>Refresh</button>
+
 
 </div>
 

@@ -2,38 +2,49 @@
 <html lang="en">
 
 
-
 <head>
-    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <!--    <script src="https://cdn.jsdelivr.net/npm/vue"></script>-->
+    <script src="js/vue.js"></script>
+    <script src="js/axios.js"></script>
 </head>
 <body>
 <div id="app">
-    {{ message }}
+    <h3> {{ mainTitle }}</h3>
+
+
+    <table border="1">
+        <tr>
+            <th>Date</th>
+            <th>Title</th>
+            <th>Content</th>
+        </tr>
+        <tr v-for="item in entries">
+            <td> {{item.entryDate }}</td>
+            <td> {{item.title}}</td>
+            <td> {{item.content}}</td>
+        </tr>
+    </table>
 </div>
 
-<div id="app-2">
-                  <span v-bind:title="message">
-                              Hover your mouse over me for a few seconds
-                                  to see my dynamically bound title!
-                                    </span>
-</div>
 <script>
 var app = new Vue({
   el: '#app',
   data: {
-    message: 'Hello Vue!'
-  }
+    mainTitle: 'Daily Diary',
+    entries:[]
+  },
+   mounted() {
+    axios
+      .get('/diary')
+      .then(response => (this.entries = response.data))
+    }
 })
 
-var app2 = new Vue({
-  el: '#app-2',
-  data: {
-    message: 'You loaded this page on ' + new Date().toLocaleString()
-  }
-})
-        </script>
+
+</script>
 
 
+<h3>Useful URLs</h3>
 <ul>
     <li><a href="/swagger-ui.html">Swagger</a></li>
     <li><a href="/h2-console">H2 Console.</a></li>

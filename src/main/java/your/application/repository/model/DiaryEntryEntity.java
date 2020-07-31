@@ -8,7 +8,7 @@ import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
-public class DiaryEntry {
+public class DiaryEntryEntity {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
@@ -16,9 +16,9 @@ public class DiaryEntry {
     private LocalDate entryDate;
     private String content;
 
-    protected DiaryEntry() {}
+    protected DiaryEntryEntity() {}
 
-    public DiaryEntry (String title, LocalDate entryDate, String content) {
+    public DiaryEntryEntity(String title, LocalDate entryDate, String content) {
         this.title = title;
         this.entryDate = entryDate;
         this.content = content;

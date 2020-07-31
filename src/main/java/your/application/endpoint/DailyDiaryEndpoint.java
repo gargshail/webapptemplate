@@ -15,11 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import your.application.endpoint.model.AddDiaryEntryRequest;
 import your.application.endpoint.model.DiaryEntry;
-import your.application.endpoint.model.PageResponse;
 import your.application.service.DiaryService;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 @RestController

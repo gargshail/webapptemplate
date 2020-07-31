@@ -4,13 +4,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import your.application.endpoint.model.AddDiaryEntryRequest;
-import your.application.repository.model.DiaryEntry;
+import your.application.endpoint.model.DiaryEntry;
+import your.application.repository.model.DiaryEntryEntity;
 import your.application.repository.DiaryRepository;
 import your.application.service.DiaryService;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 
@@ -23,9 +23,9 @@ public class DiaryServiceImpl implements DiaryService {
 
     @Override
     public void saveEntry(AddDiaryEntryRequest diaryEntryRequest) {
-        DiaryEntry diaryEntry = new DiaryEntry(diaryEntryRequest.getTitle(), LocalDate.now(), diaryEntryRequest.getContent());
-        diaryRepository.save(diaryEntry);
-        LOG.info("Saved entry {}", diaryEntry.getTitle());
+        DiaryEntryEntity diaryEntryEntity = new DiaryEntryEntity(diaryEntryRequest.getTitle(), LocalDate.now(), diaryEntryRequest.getContent());
+        diaryRepository.save(diaryEntryEntity);
+        LOG.info("Saved entry {}", diaryEntryEntity.getTitle());
     }
 
     @Override
@@ -33,8 +33,8 @@ public class DiaryServiceImpl implements DiaryService {
 
         List<your.application.endpoint.model.DiaryEntry> entries = new ArrayList<>();
 
-        for (DiaryEntry entry : diaryRepository.findAll()) {
-            your.application.endpoint.model.DiaryEntry diaryEntry = new your.application.endpoint.model.DiaryEntry();
+        for (DiaryEntryEntity entry : diaryRepository.findAll()) {
+            DiaryEntry diaryEntry = new DiaryEntry();
 
             diaryEntry.setEntryDate(entry.getEntryDate());
             diaryEntry.setContent(entry.getContent());
@@ -51,7 +51,7 @@ public class DiaryServiceImpl implements DiaryService {
 
         List<your.application.endpoint.model.DiaryEntry> entries = new ArrayList<>();
 
-        for (DiaryEntry entry : diaryRepository.findByEntryDate(entryDate)) {
+        for (DiaryEntryEntity entry : diaryRepository.findByEntryDate(entryDate)) {
             your.application.endpoint.model.DiaryEntry diaryEntry = new your.application.endpoint.model.DiaryEntry();
 
             diaryEntry.setEntryDate(entry.getEntryDate());

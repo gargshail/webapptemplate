@@ -26,8 +26,8 @@
     </table>
 
     <h3> Create a new <entry></entry></h3>
-        Title : <input type="text" v-model:value="diaryEntry.title" /> <br/>
-        Content : <input type="text" v-model:value="diaryEntry.content" /> <br/>
+        Title : <input type="text" v-model:value="diaryEntry.title" placeholder="entry title" /> <br/>
+        Content : <textarea v-model="diaryEntry.content" placeholder="add multiple lines"></textarea><br/>
         <button @click=createEntry(diaryEntry)>Create</button>
 
 
